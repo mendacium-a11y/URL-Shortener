@@ -57,9 +57,21 @@ This section should list any major frameworks/libraries used to bootstrap your p
    ```sh
    git clone https://github.com/your_username_/Project-Name.git
    ```
-2. Install NPM packages
+2. For frontend
    ```sh
-   npm install
+   cd client
+   
+   npm i 
+
+   npm run dev
+   ```
+3. For Backend
+   ```sh
+   cd server
+
+   npm i 
+
+   npm run dev
    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>

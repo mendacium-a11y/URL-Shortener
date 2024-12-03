@@ -1,5 +1,5 @@
 import express from 'express'
-import { addlink, getLink } from '../controller.js'
+import { addlink, getLink } from '../controller/notes.js'
 
 const router = express.Router()
 
