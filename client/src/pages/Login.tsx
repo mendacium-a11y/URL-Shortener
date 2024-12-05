@@ -24,8 +24,8 @@ export default function Login() {
     <>
       <Navbar />
       <div className="absolute -z-50 inset-0 text-white h-full w-full px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)] flex justify-center items-center"></div>
-      <div className="flex justify-center items-center h-[80vh] text-white">
-        <div className="rounded-3xl shadow-sm shadow-white p-6 flex justify-center items-center flex-col">
+      <div className="flex justify-center items-center h-[80vh] text-white p-5">
+        <div className="lg:w-[40vw] rounded-3xl shadow-sm shadow-white p-6 flex justify-center items-center flex-col">
           {/* HEADING SECTION */}
           <div className="top text-center">
             <h1 className="text-5xl bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent font-old">
