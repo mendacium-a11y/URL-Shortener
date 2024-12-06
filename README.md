@@ -61,6 +61,8 @@ This section should list any major frameworks/libraries used to bootstrap your p
    ```sh
    cd client
    
+   cp example.env .env
+
    npm i 
 
    npm run dev
@@ -68,6 +70,8 @@ This section should list any major frameworks/libraries used to bootstrap your p
 3. For Backend
    ```sh
    cd server
+
+   cp example.env .env
 
    npm i 
 
