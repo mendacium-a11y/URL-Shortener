@@ -16,8 +16,15 @@ export const setUp = () => {
     CREATE TABLE IF NOT EXISTS links (
         Key TEXT PRIMARY KEY,
         Url TEXT NOT NULL
-    )
-`
+    )`
+
+    const createUsersTable = `
+    CREATE TABLE IF NOT EXISTS users (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        username TEXT NOT NULL,
+        email TEXT UNIQUE NOT NULL,
+        password TEXT NOT NULL
+    )`;
 
     db.run(createTableQuery, (err) => {
         if (err) {
@@ -25,8 +32,16 @@ export const setUp = () => {
         } else {
             console.log('Table created successfully')
         }
-    })
-}
+    });
+
+    db.run(createUsersTable, (err) => {
+        if (err) {
+            console.error('Error creating users table:', err.message);
+        } else {
+            console.log('Users table created successfully.');
+        }
+    });
+};
 
 export const insertLink = (url) => {
     try {
@@ -50,7 +65,6 @@ export const insertLink = (url) => {
         console.error(error)
     }
 }
-
 export const query = async (key) => {
     try {
         const keyRegex = /^[a-zA-Z0-9]{6}$/
@@ -78,9 +92,32 @@ export const query = async (key) => {
         console.error(error)
     }
 }
+export const createUser = (username, email, password) => {
+    return new Promise((resolve, reject) => {
+        const sqlQuery = 'INSERT INTO users (username, email, password) VALUES (?, ?, ?)';
+        db.run(sqlQuery, [username, email, password], function (err) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(this.lastID);
+            }
+        });
+    });
+};
 
-export const shutDown = () => db.close()
+export const getUser = (email) => {
+        return new Promise((resolve, reject) => {
+        const sqlQuery = 'SELECT * FROM users WHERE email = ?';
+        db.get(sqlQuery, [email], (err, row) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(row || null);
+            }
+        });
+    });
+};
 
-setUp()
-// insertLink("https://google.com")
-// await query('ug9f7q')
+export const shutDown = () => db.close();
+
+setUp();
