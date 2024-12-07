@@ -7,8 +7,8 @@ import type { RouteObject } from './Router';
 const routes: RouteObject[] = [
   { path: '/', component: Home},
   { path: '/about', component: About},
-  { path: '/login', component: Login, notShowNavbarFooter: true},
-  { path: '/r/:id', component: Redirect}
+  { path: '/login', component: Login},
+  { path: '/r/:id', component: Redirect, notShowNavbarFooter: true}
 ];
 
 export default routes;
