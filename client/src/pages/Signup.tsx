@@ -1,5 +1,7 @@
 import Navbar from "@/components/Navbar";
 import { useState } from "react";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "@/Firebase/firebase";
 
 function Signup() {
   const [error, setError] = useState<string>("");
@@ -8,7 +10,7 @@ function Signup() {
   const [emailvalid, setEmailvalid] = useState<boolean>(true);
   const [passwordValid, setPasswordValid] = useState<boolean>(true);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError("");
     const formData = new FormData(e.currentTarget);
@@ -22,6 +24,18 @@ function Signup() {
       setError("");
     } else {
       setError("Please fill all the fields");
+    }
+
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+      console.log(`User created successfully`);
+      window.location.href = "/";
+    } catch (error: any) {
+      if (error.code === "auth/email-already-in-use") {
+        setError("Email already exist.");
+      } else {
+        setError("An error occurred: " + error.message);
+      }
     }
   };
 
