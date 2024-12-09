@@ -29,7 +29,7 @@ export default function Home() {
     setLoading(true);
     const key = await addLink(url)
     if (key) {
-      const temp = import.meta.env.VITE_API_URL + "links/r/" + key.key;
+      const temp = import.meta.env.VITE_API_URL + "r/" + key.key;
       setRedirectLink(temp)
       setAddlinkSuccess(true)
     } else {
