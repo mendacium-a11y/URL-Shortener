@@ -15,23 +15,6 @@ export const addlink = (req, res) => {
 
     }
 }
-export const getLink = async (req, res) => {
-    try {
-        const key = req.body.key
-        if (key.length !== 6) {
-            res.status(400).send('Invalid key')
-            throw new Error('invalid key')
-        }
-        const url = await query(key)
-        if (!url) {
-            res.status(404).send('No URL found for the provided key')
-            throw new Error('No URL found for the provided key')
-        }
-        res.status(200).send({ url })
-    } catch (error) {
-        console.error(error)
-    }
-}
 
 export const redirect = async (req, res) => {
     try {

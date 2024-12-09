@@ -38,7 +38,7 @@ const Router: FC<RouterProps> = ({ routes }) => {
 
   const match = getMatchingRoute();
 
-  return match ? <Route component={match.component} params={extractParams(match.path, currentPath)} /> : null;
+  return match ? <Route component={match.component} params={extractParams(match.path, currentPath)} /> : window.location.assign('/');
 };
 
 const extractParams = (routePath: string, currentPath: string): Params => {
