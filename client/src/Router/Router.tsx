@@ -41,7 +41,9 @@ const Router: FC<RouterProps> = ({ routes }) => {
 
   const match = getMatchingRoute();
   if (match) {
+    // checks if navbar and footer are needed to be rendered on this path
     if (match.notShowNavbarFooter) {
+      // if notShow is true, returns just the component
       return (
         <Route
         component={match.component}
@@ -49,6 +51,7 @@ const Router: FC<RouterProps> = ({ routes }) => {
         />
       );
     }
+    // if notShow is false, then returns navbar and footer with component in middle
     return (
       <>
         <Navbar />
