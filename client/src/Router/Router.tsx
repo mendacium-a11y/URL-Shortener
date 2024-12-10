@@ -2,6 +2,7 @@ import React, { useState, useEffect, FC } from "react";
 import Route from "./RouteComponent";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Home from "@/pages/Home";
 
 export interface RouteObject {
   path: string;
@@ -63,7 +64,14 @@ const Router: FC<RouterProps> = ({ routes }) => {
       </>
     );
   } else {
-    return null;
+    // if no matching route is found, renders the home page
+    return (
+      <>
+        <Navbar />
+        <Home />
+        <Footer />
+      </>
+    );
   }
 };
 

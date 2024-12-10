@@ -1,5 +1,7 @@
 export default function Login() {
-  return (<>
+  return (
+  <>
+    {/* removed background as now its part of the navbar */}
     <div className="flex justify-center items-center h-full text-white">
       <div className='h-[60vh] w-[60vh] rounded-3xl flex justify-center py-5 flex-col ' >
         <form action="submit" className="flex flex-col p-4 gap-2">

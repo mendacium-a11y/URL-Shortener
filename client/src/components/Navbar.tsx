@@ -21,9 +21,12 @@ export default function Navbar() {
         </div>
         <div className='my-auto hidden sm:block'>
           <Button className='bg-slate-700 hover:bg-white rounded-3xl mx-2 h-12 w-32 text-white hover:text-black  text-lg' variant="secondary" asChild>
+            {/* added asChild attributes to ShadCN button components to use child as primitive */}
+            {/* wrapped in anchor tag to make it a link */}
             <a href="/signup">Sign-up</a>
           </Button>
           <Button className='bg-violet-700 hover:bg-white rounded-3xl mx-2 h-12 w-32 text-white hover:text-black text-lg' variant="secondary" asChild>
+            {/* wrapped in anchor tag to make it a link */}
             <a href="/login">Login</a>
           </Button>
         </div>

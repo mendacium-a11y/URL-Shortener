@@ -61,6 +61,7 @@ export default function Home() {
               className="rounded-3xl bg-violet-700 hover:bg-white text-white hover:text-black text-xl h-12 w-36"
               onClick={handleClick}
             >
+              {/* removed button as dialogtrigger itself is a button */}
               Generate
             </DialogTrigger>
             {loading ? (
@@ -75,6 +76,7 @@ export default function Home() {
                     </div>
                   </div>
                 </DialogHeader>
+                {/* removed dialog description as its primitive is paragraph tag, not required here */}
               </DialogContent>
             ) : addlinkSuccess ? (
               <DialogContent className="bg-violet-700 border-0">
@@ -90,6 +92,7 @@ export default function Home() {
                       </a>
                     </p>
                   </DialogTitle>
+                {/* removed dialog description as its primitive is paragraph tag, not required here */}
                 </DialogHeader>
                 <QR qrString={redirectLink} />
               </DialogContent>
@@ -100,6 +103,7 @@ export default function Home() {
                     <p className="text-lg text-white text-center">error</p>
                   </DialogTitle>
                 </DialogHeader>
+                {/* removed dialog description as its primitive is paragraph tag, not required here */}
                 <QR qrString={"https://www.google.com/123456"} />
               </DialogContent>
             )}
