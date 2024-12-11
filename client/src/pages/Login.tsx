@@ -36,7 +36,7 @@ export default function Login() {
       <Navbar />
       <div className="absolute -z-50 inset-0 text-white h-full w-full px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)] flex justify-center items-center"></div>
       <div className="flex justify-center items-center h-[80vh] text-white p-5">
-        <div className="lg:w-[40vw] rounded-3xl shadow-sm shadow-white p-6 flex justify-center items-center flex-col">
+        <div className="w-full max-w-md lg:w-[40vw] rounded-3xl shadow-sm shadow-white p-6 flex justify-center items-center flex-col">
           {/* Heading Section */}
           <div className="top text-center">
             <h1 className="text-5xl bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent font-old">
@@ -51,19 +51,35 @@ export default function Login() {
             className="w-full mt-8 flex flex-col gap-5 font-exo"
           >
             <div className="formElements w-full flex flex-col gap-5">
-              <input
-                type="email"
-                placeholder="EMAIL"
-                name="email"
-                className="w-full text-gray-100 rounded-lg px-4 py-3 bg-gray-800/50 border border-gray-700/50 outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500/50 transition duration-300 placeholder:text-gray-400 placeholder:tracking-widest text-xl font-medium"
-              />
+              {/* EMAIL FIELD */}
+              <div>
+                <label htmlFor="user" className="text-2xl block mb-2">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                  title="Please enter a valid email address."
+                  className="w-full bg-transparent border-b-4 focus:outline-none focus:border-b-8"
+                />
+              </div>
 
-              <input
-                type="password"
-                placeholder="PASSWORD"
-                name="password"
-                className="w-full text-gray-100 rounded-lg px-4 py-3 bg-gray-800/50 border border-gray-700/50 outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500/50 transition duration-300 placeholder:text-gray-400 placeholder:tracking-widest text-xl font-medium"
-              />
+              {/* PASSWORD FIELD */}
+              <div>
+                <label htmlFor="user" className="text-2xl block mb-2">
+                  Password
+                </label>
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  className="w-full bg-transparent border-b-4 focus:outline-none focus:border-b-8"
+                  pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+                  title="Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character"
+                />
+              </div>
             </div>
 
             <div className="bottom w-full flex flex-col gap-2 mt-5">
