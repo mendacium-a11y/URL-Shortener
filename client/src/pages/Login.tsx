@@ -1,10 +1,8 @@
-import Navbar from "@/components/Navbar";
-
 export default function Login() {
-  return (<>
-    <Navbar />
-    <div className="absolute -z-50 inset-0 text-white h-full w-full px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)] flex justify-center items-center"></div>
-    <div className="flex justify-center items-center h-[80vh] text-white">
+  return (
+  <>
+    {/* removed background as now its part of the navbar */}
+    <div className="flex justify-center items-center h-full text-white">
       <div className='h-[60vh] w-[60vh] rounded-3xl flex justify-center py-5 flex-col ' >
         <form action="submit" className="flex flex-col p-4 gap-2">
           <label htmlFor="user" className="text-2xl">UserName</label>
