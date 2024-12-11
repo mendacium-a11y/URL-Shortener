@@ -1,5 +1,6 @@
 import React, { useState, useEffect, FC } from 'react';
 import Route from './RouteComponent'
+import Home from '@/pages/Home';
 
 interface RouteObject {
   path: string;
@@ -38,7 +39,7 @@ const Router: FC<RouterProps> = ({ routes }) => {
 
   const match = getMatchingRoute();
 
-  return match ? <Route component={match.component} params={extractParams(match.path, currentPath)} /> : null;
+  return match ? <Route component={match.component} params={extractParams(match.path, currentPath)} /> : (<Home/ >);
 };
 
 const extractParams = (routePath: string, currentPath: string): Params => {

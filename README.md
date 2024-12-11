@@ -57,9 +57,25 @@ This section should list any major frameworks/libraries used to bootstrap your p
    ```sh
    git clone https://github.com/your_username_/Project-Name.git
    ```
-2. Install NPM packages
+2. For frontend
    ```sh
-   npm install
+   cd client
+   
+   cp example.env .env
+
+   npm i 
+
+   npm run dev
+   ```
+3. For Backend
+   ```sh
+   cd server
+
+   cp example.env .env
+
+   npm i 
+
+   npm run dev
    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -111,5 +127,4 @@ Your Name - [@Saksham2467](https://twitter.com/Saksham2467) - sakshamsaha1212@gm
 Project Link: [https://github.com/mendacium-a11y/Shortify](https://github.com/mendacium-a11y/Shortify)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 

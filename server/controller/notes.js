@@ -15,9 +15,11 @@ export const addlink = (req, res) => {
 
     }
 }
-export const getLink = async (req, res) => {
+
+export const redirect = async (req, res) => {
     try {
-        const key = req.body.key
+        const key = req.params.key
+        console.log('REQUEST for ', key)
         if (key.length !== 6) {
             res.status(400).send('Invalid key')
             throw new Error('invalid key')
@@ -27,7 +29,7 @@ export const getLink = async (req, res) => {
             res.status(404).send('No URL found for the provided key')
             throw new Error('No URL found for the provided key')
         }
-        res.status(200).send({ url })
+        res.redirect(url)
     } catch (error) {
         console.error(error)
     }
