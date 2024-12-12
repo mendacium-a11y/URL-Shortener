@@ -1,18 +1,16 @@
-import { insertLink, query } from '../db.js'
+import { insertLinkIfNotExists, query } from '../db.js'
 
-export const addlink = (req, res) => {
+export const addlink = async (req, res) => {
     try {
         const url = req.body.url
-        const key = insertLink(url)
-        console.log(key)
-
+        const key = await insertLinkIfNotExists(url)
         if (key) {
             res.status(200).send({ key })
         } else {
             res.send(400)
         }
     } catch (error) {
-
+        res.status(500).send(error)
     }
 }
 
