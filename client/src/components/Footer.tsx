@@ -19,13 +19,13 @@ export default function Footer() {
           </a>
         </li>
         <li>
-          <a target="_blank" href="https://twitter.com/Saksham2467">
+          <a target="_blank" href="https://twitter.com/Saksham2467" rel="noreferrer">
             {/* added icons to show on mobile */}
             {isMobile ? <Twitter /> : "Twitter"}
           </a>
         </li>
         <li>
-          <a target="_blank" href="mailto:sakshamsaha1212+shortify@gmail.com">
+          <a target="_blank" href="mailto:sakshamsaha1212+shortify@gmail.com" rel="noreferrer">
             {/* added icons to show on mobile */}
             {isMobile ? <Mail /> : "E-mail"}
           </a>
