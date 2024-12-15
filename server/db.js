@@ -50,8 +50,8 @@ export const insertLinkIfNotExists = async (url) => {
         const result = urlRegex.test(url)
         if (!result) throw new Error('invalid url')
         const foundKey = await getKeyFromUrl(url)
-        console.log('Key Already exists for url: ', foundKey)
         if (!foundKey) return insertLink(url)
+        console.log('Key Already exists for url: ', foundKey)
         return foundKey
     } catch (error) {
         console.error(error)
