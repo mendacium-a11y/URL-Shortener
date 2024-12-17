@@ -1,5 +1,4 @@
 
-import Navbar from "@/components/Navbar";
 import { useState } from "react";
 import { auth } from "@/Firebase/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth/web-extension";
