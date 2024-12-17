@@ -92,7 +92,7 @@ export default function Home() {
                       </a>
                     </p>
                   </DialogTitle>
-                {/* removed dialog description as its primitive is paragraph tag, not required here */}
+                  {/* removed dialog description as its primitive is paragraph tag, not required here */}
                 </DialogHeader>
                 <QR qrString={redirectLink} />
               </DialogContent>
