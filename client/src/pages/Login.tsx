@@ -1,3 +1,4 @@
+
 import Navbar from "@/components/Navbar";
 import { useState } from "react";
 import { auth } from "@/Firebase/firebase";
@@ -33,8 +34,6 @@ export default function Login() {
 
   return (
     <>
-      <Navbar />
-      <div className="absolute -z-50 inset-0 text-white h-full w-full px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)] flex justify-center items-center"></div>
       <div className="flex justify-center items-center h-[80vh] text-white p-5">
         <div className="w-full max-w-md lg:w-[40vw] rounded-3xl shadow-sm shadow-white p-6 flex justify-center items-center flex-col">
           {/* Heading Section */}
