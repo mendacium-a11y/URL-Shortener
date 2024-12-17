@@ -1,6 +1,6 @@
 import Navbar from "@/components/Navbar";
 import { useState } from "react";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "@/Firebase/firebase";
 
 function Signup() {
@@ -27,7 +27,17 @@ function Signup() {
     }
 
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
+      const userCredentials = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      // UPDATED THE PROFILE BY UPDATING THE DISPLAY NAME
+      const user = userCredentials.user;
+      await updateProfile(user as any, {
+        displayName: username,
+      });
       console.log(`User created successfully`);
       window.location.href = "/";
     } catch (error: any) {

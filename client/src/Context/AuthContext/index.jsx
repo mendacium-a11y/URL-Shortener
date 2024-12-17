@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect, useContext } from "react";
 import { auth } from "@/Firebase/firebase";
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 
 const AuthContext = createContext(null);
 
@@ -25,7 +25,16 @@ const AuthProvider = ({ children }) => {
   // WHEN THE USER IS SUCCESSFULLY LOGGED IN, THIS FUNCTION IS CALLED AND USER'S INFORMATION IS STORED IN THE STATE VARIABLE
   async function initializeUser(user) {
     if (user) {
-      setCurrentUser({ ...user });
+      // DESTRUCTURE ONLY THE NECESSARY DATA FROM THE USER OBJECT WHICH IS REQUIRED
+      const { email, displayName, photoURL } = user;
+      const filteredUserData = {
+        email,
+        displayName,
+        photoURL,
+      };
+
+      // SET THE USER DATA TO THE STATE VARIABLE
+      setCurrentUser(filteredUserData);
       setUserLoggedIn(true);
     } else {
       setCurrentUser(null);
@@ -34,11 +43,24 @@ const AuthProvider = ({ children }) => {
     setLoading(false);
   }
 
+  const logoutFunctionality = async () => {
+    try {
+      // CALL FIREBASE SIGNOUT METHOD
+      await signOut(auth);
+      setCurrentUser(null);
+      setUserLoggedIn(false);
+      console.log(`User logged out successfully`);
+    } catch (error) {
+      console.error(`Error while logging out: ${error.message}`);
+    }
+  };
+
   // EXPOSE THESE VARIABLES TO THE CHILDREN
   const value = {
     currentUser,
     userLoggedIn,
     loading,
+    logoutFunctionality,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
