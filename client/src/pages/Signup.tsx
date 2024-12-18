@@ -1,4 +1,3 @@
-import Navbar from "@/components/Navbar";
 import { useState } from "react";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "@/Firebase/firebase";
@@ -59,95 +58,91 @@ function Signup() {
   };
 
   return (
-    <div className="relative min-h-screen">
-      <div className="absolute -z-50 inset-0 text-white h-full w-full px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)] flex justify-center items-center"></div>
-      <Navbar />
-      <div className="flex justify-center items-center min-h-[calc(100vh-4rem)] px-4">
-        <div className="w-full max-w-md lg:w-[40vw] rounded-3xl shadow-sm shadow-white p-8 flex justify-center items-center flex-col">
-          {/* HEADING SECTION */}
-          <div className="text-center w-full mb-6">
-            <h1 className="text-4xl md:text-5xl bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent">
-              Create An Account
-            </h1>
+    <div className="flex justify-center items-center min-h-[calc(100vh-4rem)] px-4">
+      <div className="w-full max-w-md lg:w-[40vw] rounded-3xl shadow-sm shadow-white p-8 flex justify-center items-center flex-col">
+        {/* HEADING SECTION */}
+        <div className="text-center w-full mb-6">
+          <h1 className="text-4xl md:text-5xl bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent">
+            Create An Account
+          </h1>
+        </div>
+
+        {/* FORM FOR LOGIN */}
+        <form
+          action="submit"
+          onSubmit={handleSubmit}
+          className="w-full flex flex-col gap-4"
+        >
+          <div className="formElements w-full flex flex-col gap-4 text-white">
+            {/* USERNAME FIELD */}
+            <div>
+              <label htmlFor="user" className="text-2xl block mb-2">
+                UserName
+              </label>
+              <input
+                type="text"
+                id="username"
+                name="username"
+                pattern="^[a-zA-Z0-9_]{6,15}$"
+                title="Username must be between 6 and 15 characters and contain only letters, numbers, and underscores."
+                className="w-full bg-transparent border-b-4 focus:outline-none focus:border-b-8"
+              />
+            </div>
+
+            {/* EMAIL FIELD */}
+            <div>
+              <label htmlFor="user" className="text-2xl block mb-2">
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                title="Please enter a valid email address."
+                className="w-full bg-transparent border-b-4 focus:outline-none focus:border-b-8"
+              />
+            </div>
+
+            {/* PASSWORD FIELD */}
+            <div>
+              <label htmlFor="user" className="text-2xl block mb-2">
+                Password
+              </label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                className="w-full bg-transparent border-b-4 focus:outline-none focus:border-b-8"
+                onChange={handlePasswordCheck}
+              />
+              {!passwordValid && (
+                <span className="text-red-400 text-sm mt-1 block">
+                  Password must be at least 8 characters long and include at
+                  least one uppercase letter, one lowercase letter, one number,
+                  and one special character
+                </span>
+              )}
+            </div>
           </div>
 
-          {/* FORM FOR LOGIN */}
-          <form
-            action="submit"
-            onSubmit={handleSubmit}
-            className="w-full flex flex-col gap-4"
-          >
-            <div className="formElements w-full flex flex-col gap-4 text-white">
-              {/* USERNAME FIELD */}
-              <div>
-                <label htmlFor="user" className="text-2xl block mb-2">
-                  UserName
-                </label>
-                <input
-                  type="text"
-                  id="username"
-                  name="username"
-                  pattern="^[a-zA-Z0-9_]{6,15}$"
-                  title="Username must be between 6 and 15 characters and contain only letters, numbers, and underscores."
-                  className="w-full bg-transparent border-b-4 focus:outline-none focus:border-b-8"
-                />
-              </div>
-
-              {/* EMAIL FIELD */}
-              <div>
-                <label htmlFor="user" className="text-2xl block mb-2">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-                  title="Please enter a valid email address."
-                  className="w-full bg-transparent border-b-4 focus:outline-none focus:border-b-8"
-                />
-              </div>
-
-              {/* PASSWORD FIELD */}
-              <div>
-                <label htmlFor="user" className="text-2xl block mb-2">
-                  Password
-                </label>
-                <input
-                  type="password"
-                  id="password"
-                  name="password"
-                  className="w-full bg-transparent border-b-4 focus:outline-none focus:border-b-8"
-                  onChange={handlePasswordCheck}
-                />
-                {!passwordValid && (
-                  <span className="text-red-400 text-sm mt-1 block">
-                    Password must be at least 8 characters long and include at
-                    least one uppercase letter, one lowercase letter, one
-                    number, and one special character
-                  </span>
-                )}
-              </div>
-            </div>
-
-            <div className="bottom w-full flex flex-col gap-4 mt-4">
-              <button className="text-2xl tracking-wider font-medium p-2 rounded-md bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 transition duration-300 shadow-lg hover:shadow-violet-500/25">
-                CREATE ACCOUNT
-              </button>
-              {error && (
-                <p className="text-red-400 text-lg text-center bg-red-400/10 py-2 rounded-lg border border-red-400/20">
-                  {error}
-                </p>
-              )}
-              <p className="text-slate-400 mt-2 text-center">
-                Already have an account ?{" "}
-                <a href="/login" className="text-blue-500 hover:underline">
-                  Login
-                </a>
+          <div className="bottom w-full flex flex-col gap-4 mt-4">
+            <button className="text-2xl tracking-wider font-medium p-2 rounded-md bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 transition duration-300 shadow-lg hover:shadow-violet-500/25">
+              CREATE ACCOUNT
+            </button>
+            {error && (
+              <p className="text-red-400 text-lg text-center bg-red-400/10 py-2 rounded-lg border border-red-400/20">
+                {error}
               </p>
-            </div>
-          </form>
-        </div>
+            )}
+            <p className="text-slate-400 mt-2 text-center">
+              Already have an account ?{" "}
+              <a href="/login" className="text-blue-500 hover:underline">
+                Login
+              </a>
+            </p>
+          </div>
+        </form>
       </div>
     </div>
   );
