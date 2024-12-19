@@ -4,9 +4,6 @@ import { auth } from "@/Firebase/firebase";
 
 function Signup() {
   const [error, setError] = useState<string>("");
-
-  const [userNameValid, setUserNameValid] = useState<boolean>(true);
-  const [emailvalid, setEmailvalid] = useState<boolean>(true);
   const [passwordValid, setPasswordValid] = useState<boolean>(true);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
