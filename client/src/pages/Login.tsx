@@ -1,3 +1,5 @@
+import Footer from "@/components/Footer";
+
 export default function Login() {
   return (
     <>
@@ -16,6 +18,8 @@ export default function Login() {
           <p className="px-4">Not logged in? <a href="#" className="text-blue-500">Sign Up</a></p>
         </div>
       </div>
+      {/* Added the footer here */}
+      <Footer/>
     </>
   )
 }
