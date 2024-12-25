@@ -6,7 +6,7 @@ export default function Footer() {
   const isMobile = useMediaQuery("(max-width: 768px)");
 
   return (
-    // removed absolute position from footer bc it was causing problem on home page
+   
     <footer className="  mt-5   w-full footer text-white py-4">
       <ul className="list-none flex gap-4 sm:gap-10 justify-center items-center">
         <li>
