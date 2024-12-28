@@ -36,7 +36,8 @@ export default function Home() {
 
   return (
     <>
-      <div className="flex justify-center items-start">
+    
+      <div className="flex justify-center items-start min-h-[80vh]">
         <div className="text-white text-center mt-36 font-sans text-8xl">
           <p className="max-[400px]:text-4xl text-4xl md:text-7xl font-extrabold bg-clip-text text-transparent bg-[linear-gradient(to_right,theme(colors.indigo.400),theme(colors.indigo.100),theme(colors.sky.400),theme(colors.fuchsia.400),theme(colors.sky.400),theme(colors.indigo.100),theme(colors.indigo.400))] bg-[length:200%_auto] animate-gradient">
             The Fastest Way
