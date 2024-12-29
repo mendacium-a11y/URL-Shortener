@@ -151,6 +151,9 @@ export default function Navbar() {
               </>
             ) : (
               <>
+                <span className="text-white text-xl hover:transition-all duration-1000 hover:underline hover:cursor-pointer hover:text-violet-400">
+                  Contributors
+                </span>
                 {window.location.pathname !== "/signup" && (
                   <Button
                     onClick={() => (window.location.href = "/signup")}
