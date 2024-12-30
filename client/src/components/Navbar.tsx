@@ -8,6 +8,7 @@ import {
 import { useEffect } from "react";
 // @ts-ignore
 import { AuthContext, useAuth } from "../Context/AuthContext/index.jsx";
+import { IoPeopleCircleSharp } from "react-icons/io5";
 
 // Define the type for the context value
 interface AuthContextType {
@@ -81,10 +82,16 @@ export default function Navbar() {
             </div>
           </>
         ) : (
-          <>
-            <span className="text-white text-2xl hover:transition-all duration-1000 hover:underline hover:cursor-pointer hover:text-violet-400">
-              Contributors
-            </span>
+          <div className="md:flex items-center gap-2">
+            {window.location.pathname !== "/contributors" && (
+              <span
+                onClick={() => (window.location.href = "/contributors")}
+                className="flex items-center gap-1 text-white text-xl hover:transition-all duration-1000 hover:underline hover:cursor-pointer hover:text-violet-400"
+              >
+                <IoPeopleCircleSharp className="text-4xl" />
+                <span>Contributors</span>
+              </span>
+            )}
             {window.location.pathname !== "/signup" && (
               <Button
                 onClick={() => (window.location.href = "/signup")}
@@ -103,7 +110,7 @@ export default function Navbar() {
                 Login
               </Button>
             )}
-          </>
+          </div>
         )}
       </div>
       <div className="my-auto block sm:hidden">
@@ -150,10 +157,16 @@ export default function Navbar() {
                 </div>
               </>
             ) : (
-              <>
-                <span className="text-white text-xl hover:transition-all duration-1000 hover:underline hover:cursor-pointer hover:text-violet-400">
-                  Contributors
-                </span>
+              <div className="md:flex items-center gap-2">
+                {window.location.pathname !== "/contributors" && (
+                  <span
+                    onClick={() => (window.location.href = "/contributors")}
+                    className="flex items-center gap-1 text-white text-xl hover:transition-all duration-1000 hover:underline hover:cursor-pointer hover:text-violet-400"
+                  >
+                    <IoPeopleCircleSharp className="text-4xl" />
+                    <span>Contributors</span>
+                  </span>
+                )}
                 {window.location.pathname !== "/signup" && (
                   <Button
                     onClick={() => (window.location.href = "/signup")}
@@ -172,7 +185,7 @@ export default function Navbar() {
                     Login
                   </Button>
                 )}
-              </>
+              </div>
             )}
           </PopoverContent>
         </Popover>
