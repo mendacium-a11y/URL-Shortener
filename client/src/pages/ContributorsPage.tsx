@@ -4,8 +4,43 @@ import { FaStar } from "react-icons/fa6";
 import { GoRepoForked } from "react-icons/go";
 import { IoStatsChartOutline } from "react-icons/io5";
 import { FaPeopleLine } from "react-icons/fa6";
+import { useEffect, useState } from "react";
 
 function ContributorsPage() {
+  const [contributors, setContributors] = useState([]);
+
+  useEffect(() => {
+    const fetchContributors = async () => {
+      try {
+        const response = await fetch('http://localhost:3000/contributors/allContributors', {
+          method: 'GET',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include'
+        });
+
+        if (!response.ok) {
+          throw new Error(`Backend API error: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log('Received data:', data);
+        
+        if (data.success) {
+          setContributors(data.data);
+        } else {
+          throw new Error(data.error || 'Failed to fetch contributors');
+        }
+      } catch (error) {
+        console.error('Error fetching contributors:', error);
+      } 
+    };
+
+    fetchContributors();
+  }, []);
+
   return (
     <div className="min-h-screen w-full text-white flex flex-col mt-5 overflow-x-hidden">
       <div className="Project-stats flex flex-col justify-center items-center">
