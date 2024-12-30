@@ -8,34 +8,46 @@ import { useEffect, useState } from "react";
 
 function ContributorsPage() {
   const [contributors, setContributors] = useState([]);
+  const [repoData, setRepoData] = useState({});
 
   useEffect(() => {
     const fetchContributors = async () => {
       try {
-        const response = await fetch('http://localhost:3000/contributors/allContributors', {
-          method: 'GET',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-          },
-          credentials: 'include'
-        });
+        const response = await fetch(
+          "http://localhost:3000/contributors/allContributors",
+          {
+            method: "GET",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+            credentials: "include",
+          }
+        );
 
         if (!response.ok) {
           throw new Error(`Backend API error: ${response.status}`);
         }
 
         const data = await response.json();
-        console.log('Received data:', data);
-        
+        console.log("Received data:", data);
+
         if (data.success) {
           setContributors(data.data);
         } else {
-          throw new Error(data.error || 'Failed to fetch contributors');
+          throw new Error(data.error || "Failed to fetch contributors");
         }
+
+        // Get repo data directly from GitHub
+        const repoResponse = await fetch(
+          "https://api.github.com/repos/mendacium-a11y/Shortify"
+        );
+        const repoData = await repoResponse.json();
+        console.log(repoData);
+        setRepoData(repoData);
       } catch (error) {
-        console.error('Error fetching contributors:', error);
-      } 
+        console.error("Error fetching contributors:", error);
+      }
     };
 
     fetchContributors();
