@@ -17,8 +17,6 @@ app.use(
     credentials: true,
   })
 );
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use("/links", linkRoute);
 app.use("/contributors", contributorRoute);
