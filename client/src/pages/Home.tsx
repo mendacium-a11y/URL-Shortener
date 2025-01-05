@@ -2,13 +2,7 @@ import React, { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { addLink } from "../api/url";
 import { QR } from "@/components/qrcode";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Home() {
@@ -16,6 +10,7 @@ export default function Home() {
   const [redirectLink, setRedirectLink] = useState<string>("");
   const [addlinkSuccess, setAddlinkSuccess] = useState<boolean>();
   const [loading, setLoading] = useState<boolean>(false);
+  const [progress, setProgress] = useState(0);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUrl(event.target.value);
@@ -23,20 +18,31 @@ export default function Home() {
 
   const handleClick = async () => {
     setLoading(true);
-    const key = await addLink(url);
-    if (key) {
-      const temp = import.meta.env.VITE_API_URL + "r/" + key.key;
-      setRedirectLink(temp)
-      setAddlinkSuccess(true)
-    } else {
-      setAddlinkSuccess(false);
+    setProgress(20);
+    setTimeout(() => setProgress(60), 500); // simulate progress
+    setTimeout(async () => {
+      const key = await addLink(url);
+      setProgress(100);
+      if (key) {
+        const temp = import.meta.env.VITE_API_URL + "r/" + key.key;
+        setRedirectLink(temp);
+        setAddlinkSuccess(true);
+      } else {
+        setAddlinkSuccess(false);
+      }
+      setLoading(false);
+    }, 3000);
+  };
+
+  const handleCopy = () => {
+    if (redirectLink) {
+      navigator.clipboard.writeText(redirectLink);
+      alert("Link copied to clipboard!");
     }
-    setLoading(false);
   };
 
   return (
     <>
-    
       <div className="flex justify-center items-start min-h-[80vh]">
         <div className="text-white text-center mt-36 font-sans text-8xl">
           <p className="max-[400px]:text-4xl text-4xl md:text-7xl font-extrabold bg-clip-text text-transparent bg-[linear-gradient(to_right,theme(colors.indigo.400),theme(colors.indigo.100),theme(colors.sky.400),theme(colors.fuchsia.400),theme(colors.sky.400),theme(colors.indigo.100),theme(colors.indigo.400))] bg-[length:200%_auto] animate-gradient">
@@ -62,50 +68,53 @@ export default function Home() {
               className="rounded-3xl bg-violet-700 hover:bg-white text-white hover:text-black text-xl h-12 w-36"
               onClick={handleClick}
             >
-              {/* removed button as dialogtrigger itself is a button */}
               Generate
             </DialogTrigger>
+
             {loading ? (
               <DialogContent className="bg-violet-700 border-0">
                 <DialogHeader>
                   <div className="flex justify-center">
                     <div className="flex flex-col space-y-3">
-                      <div className="space-y-2">
-                        <Skeleton className="h-4 w-[250px]" />
+                      {/* Custom Progress Bar */}
+                      <div className="w-full bg-gray-300 h-3 rounded-full mt-2">
+                        <div
+                          className="bg-green-500 h-3 rounded-full"
+                          style={{ width: `${progress}%` }}
+                        />
                       </div>
+                      <Skeleton className="h-4 w-[250px]" />
                       <Skeleton className="h-[125px] w-[250px] rounded-xl" />
                     </div>
                   </div>
                 </DialogHeader>
-                {/* removed dialog description as its primitive is paragraph tag, not required here */}
               </DialogContent>
             ) : addlinkSuccess ? (
               <DialogContent className="bg-violet-700 border-0">
                 <DialogHeader>
                   <DialogTitle>
                     <p className="text-lg text-white text-center underline">
-                      <a
-                        href={redirectLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
+                      <a href={redirectLink} target="_blank" rel="noopener noreferrer">
                         {redirectLink}
                       </a>
                     </p>
                   </DialogTitle>
-                  {/* removed dialog description as its primitive is paragraph tag, not required here */}
+                  <QR qrString={redirectLink} />
+                  <button
+                    onClick={handleCopy}
+                    className="mt-4 rounded-3xl bg-green-600 hover:bg-green-500 text-white p-2"
+                  >
+                    Copy Link
+                  </button>
                 </DialogHeader>
-                <QR qrString={redirectLink} />
               </DialogContent>
             ) : (
               <DialogContent className="bg-violet-700 border-0">
                 <DialogHeader>
                   <DialogTitle>
-                    <p className="text-lg text-white text-center">error</p>
+                    <p className="text-lg text-white text-center">Error</p>
                   </DialogTitle>
                 </DialogHeader>
-                {/* removed dialog description as its primitive is paragraph tag, not required here */}
-                <QR qrString={"https://www.google.com/123456"} />
               </DialogContent>
             )}
           </Dialog>
