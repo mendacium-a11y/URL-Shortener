@@ -47,8 +47,8 @@ const Router: FC<RouterProps> = ({ routes }) => {
       // if notShow is true, returns just the component
       return (
         <Route
-        component={match.component}
-        params={extractParams(match.path, currentPath)}
+          component={match.component}
+          params={extractParams(match.path, currentPath)}
         />
       );
     }

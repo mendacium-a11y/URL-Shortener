@@ -6,7 +6,8 @@ export default function Footer() {
   const isMobile = useMediaQuery("(max-width: 768px)");
 
   return (
-    <footer className="absolute bottom-0 left-0 right-0 w-full footer text-white pb-4 pt-4">
+   
+    <footer className="  mt-5   w-full footer text-white py-4">
       <ul className="list-none flex gap-4 sm:gap-10 justify-center items-center">
         <li>
           <a
@@ -19,13 +20,13 @@ export default function Footer() {
           </a>
         </li>
         <li>
-          <a target="_blank" href="https://twitter.com/Saksham2467">
+          <a target="_blank" href="https://twitter.com/Saksham2467" rel="noreferrer">
             {/* added icons to show on mobile */}
             {isMobile ? <Twitter /> : "Twitter"}
           </a>
         </li>
         <li>
-          <a target="_blank" href="mailto:sakshamsaha1212+shortify@gmail.com">
+          <a target="_blank" href="mailto:sakshamsaha1212+shortify@gmail.com" rel="noreferrer">
             {/* added icons to show on mobile */}
             {isMobile ? <Mail /> : "E-mail"}
           </a>
