@@ -28,6 +28,7 @@ export default function Home() {
       const temp = import.meta.env.VITE_API_URL + "r/" + key.key;
       setRedirectLink(temp)
       setAddlinkSuccess(true)
+      setUrl("")
     } else {
       setAddlinkSuccess(false);
     }
@@ -48,11 +49,10 @@ export default function Home() {
           <p className="max-[400px]:text-4xl text-4xl md:text-7xl font-extrabold bg-clip-text text-transparent bg-[linear-gradient(to_right,theme(colors.indigo.400),theme(colors.indigo.100),theme(colors.sky.400),theme(colors.fuchsia.400),theme(colors.sky.400),theme(colors.indigo.100),theme(colors.indigo.400))] bg-[length:200%_auto] animate-gradient">
             Links
           </p>
-          <Input
-            className="bg-slate-950 border-slate-700 focus:border-slate-500 border-4 mt-20 h-16 px-5"
-            onChange={handleInputChange}
-            onKeyDown={(event: React.KeyboardEvent<HTMLInputElement>) => {
-              if (event.key === "Enter") {
+          <Input className='bg-slate-950 border-slate-700 focus:border-slate-500 border-4 mt-20 h-16 px-5'
+            value= {url} onChange={handleInputChange} onKeyDown={(event: React.KeyboardEvent<HTMLInputElement>) => {
+              if (event.key === 'Enter') {
+
                 handleClick();
               }
             }}

@@ -27,28 +27,46 @@ export const setUp = () => {
         }
     })
 }
-
-export const insertLink = (url) => {
+const getKeyFromUrl = (url) => {
+    const sqlQuery = 'SELECT * FROM links WHERE Url = ?'
+    return new Promise((resolve, reject) => {
+        db.get(sqlQuery, [url], (err, row) => {
+            if (err) {
+                reject(err)
+                return console.error(err.message)
+            }
+            if (row) {
+                resolve(row.Key)
+            } else {
+                resolve(null)
+            }
+        })
+    })
+}
+export const insertLinkIfNotExists = async (url) => {
+    console.log('A Request for InsertLink')
     try {
-        const urlRegex = /^(https?):\/\/(www\.)?([a-zA-Z0-9\-.]+\.)([a-zA-Z0-9-.]+)\/?([a-zA-z0-9\/?=%&-]+)?$/
+        const urlRegex = /^(https?):\/\/(www\.)?([a-zA-Z0-9\-.]+\.)([a-zA-Z0-9-.]+)\/?([a-zA-z0-9/?=%&-]+)?$/
         const result = urlRegex.test(url)
-
-        if (result) {
-            const key = Math.random().toString(36).slice(2, 8)
-            const sqlQuery = 'INSERT INTO links (Key, Url) VALUES (?, ?)'
-            db.run(sqlQuery, [key, url], function (err) {
-                if (err) {
-                    return console.error(err.message)
-                }
-                console.log(`A row has been inserted with key ${key}`)
-            })
-            return key
-        } else {
-            throw new Error('invalid url')
-        }
+        if (!result) throw new Error('invalid url')
+        const foundKey = await getKeyFromUrl(url)
+        if (!foundKey) return insertLink(url)
+        console.log('Key Already exists for url: ', foundKey)
+        return foundKey
     } catch (error) {
         console.error(error)
     }
+}
+const insertLink = (url) => {
+    const key = Math.random().toString(36).slice(2, 8)
+    const sqlQuery = 'INSERT INTO links (Key, Url) VALUES (?, ?)'
+    db.run(sqlQuery, [key, url], function (err) {
+        if (err) {
+            return console.error(err.message)
+        }
+        console.log(`A row has been inserted with key ${key}`)
+    })
+    return key
 }
 
 export const query = async (key) => {
